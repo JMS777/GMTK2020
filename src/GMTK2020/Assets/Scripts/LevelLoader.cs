@@ -9,6 +9,15 @@ public class LevelLoader : Singleton<LevelLoader>
     public Animator transition;
     public float transitionTime = 1f;
 
+    public bool LoadingLevel { get; private set; }
+
+    public enum Levels
+    {
+        Splash,
+        Menu,
+        Game
+    }
+
     public void LoadNextLevel()
     {
         LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
@@ -22,10 +31,12 @@ public class LevelLoader : Singleton<LevelLoader>
 
     IEnumerator LoadLevelRoutine(int sceneBuildIndex)
     {
+        LoadingLevel = true;
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
 
+        LoadingLevel = false;
         SceneManager.LoadScene(sceneBuildIndex);
     }
 }

@@ -11,10 +11,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         get
         {
             lock (m_Lock){
-                if (shuttingDown){
-                    Debug.LogWarning("[Singleton] Instance '" + typeof(T) + "' already destroyed. Returning null.");
-                    return null;
-                }
+                // if (shuttingDown){
+                //     Debug.LogWarning("[Singleton] Instance '" + typeof(T) + "' already destroyed. Returning null.");
+                //     return null;
+                // }
 
                 if (instance == null){
                     instance = FindObjectOfType<T>();
@@ -24,7 +24,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                         var singletonObject = new GameObject();
                         instance = singletonObject.AddComponent<T>();
                         singletonObject.name = typeof(T).ToString() + " (Singleton)";
-
+                        Debug.Log($"Creating new instance of {typeof(T).Name}");
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
