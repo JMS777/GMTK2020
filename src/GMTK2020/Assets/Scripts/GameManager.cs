@@ -9,14 +9,18 @@ public class GameManager : MonoBehaviour
     private LevelController level;
     private PlayerController player;
 
+    private HudController hud;
+
     private void Awake()
     {
         level = FindObjectOfType<LevelController>();
         player = FindObjectOfType<PlayerController>();
+        hud = FindObjectOfType<HudController>();
 
-        player.GetComponent<PlayerInputController>().enabled = false;
 
         player.PlayerDied += OnPlayerDeath;
+        player.PlayerWin += OnPlayerWin;
+        player.PlayerDeepFied += OnPlayerDeepFied;
     }
 
     // Start is called before the first frame update
@@ -35,12 +39,42 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         level.StartLevel();
-        player.GetComponent<PlayerInputController>().enabled = true;
+        player.StartPlayer();
+    }
+
+    private void OnPlayerDeepFied(int deepFryLevel)
+    {
+        hud.SetDeepFryLevel(deepFryLevel);
     }
 
     private void OnPlayerDeath()
     {
         level.Pause();
-        player.GetComponent<PlayerInputController>().enabled = false;
+        player.StopPlayer();
+
+        GameOver();
+    }
+
+    private void OnPlayerWin()
+    {
+        level.Pause();
+        player.StopPlayer();
+
+        Win();
+    }
+
+    private void Win()
+    {
+        hud.Win();
+    }
+
+    private void GameOver()
+    {
+        hud.Lose();
+    }
+
+    public void MainMenu()
+    {
+        LevelLoader.Instance.LoadLevel((int)LevelLoader.Levels.Menu);
     }
 }

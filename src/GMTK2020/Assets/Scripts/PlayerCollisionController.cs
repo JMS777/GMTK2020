@@ -24,10 +24,18 @@ public class PlayerCollisionController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (!enabled)
+        {
+            return;
+        }
+
         if (other.tag == "Eel")
         {
-            Debug.Log("Collision");
             player.OnHitEel();
+        }
+        else if (other.tag == "Chip")
+        {
+            player.OnHitChip();
         }
     }
 }
