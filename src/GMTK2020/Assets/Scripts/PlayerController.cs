@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         if (currentTime > delay && playerInput.enabled)
         {
             OnSwish();
+            currentTime = 0;
         }
     }
 

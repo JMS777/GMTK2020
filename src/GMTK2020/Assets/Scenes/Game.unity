@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -10794,6 +10794,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElectricitySounds
       objectReference: {fileID: 0}
+    - target: {fileID: 8131167410802146380, guid: 49f29c924e8427a4685489e0ae4f8134,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.493
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131167410973233103, guid: 49f29c924e8427a4685489e0ae4f8134,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.522
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49f29c924e8427a4685489e0ae4f8134, type: 3}
 --- !u!1001 &2038737364
@@ -11745,6 +11755,11 @@ PrefabInstance:
         type: 3}
       propertyPath: lives
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395682314020631435, guid: 35ecd1bd10b905e4a833776605faa939,
+        type: 3}
+      propertyPath: delay
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 1395682314020631437, guid: 35ecd1bd10b905e4a833776605faa939,
         type: 3}
