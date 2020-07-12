@@ -37,5 +37,9 @@ public class PlayerCollisionController : MonoBehaviour
         {
             player.OnHitChip();
         }
+        else if (other.tag == "End")
+        {
+            player.OnHitChip();
+        }
     }
 }

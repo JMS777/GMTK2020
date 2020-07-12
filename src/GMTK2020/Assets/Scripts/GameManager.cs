@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         hud = FindObjectOfType<HudController>();
 
-
         player.PlayerDied += OnPlayerDeath;
         player.PlayerWin += OnPlayerWin;
         player.PlayerDeepFied += OnPlayerDeepFied;
@@ -27,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(DelayedStart());
+        OnPlayerDeepFied(0);
     }
 
     IEnumerator DelayedStart()
@@ -45,6 +45,27 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeepFied(int deepFryLevel)
     {
         hud.SetDeepFryLevel(deepFryLevel);
+
+        switch (deepFryLevel)
+        {
+            case 0:
+                MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry1);
+                break;
+            case 1:
+                MusicManager.Instance.FadeOut(MusicTrackIdentifier.DeepFry1);
+                MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry2);
+                break;
+            case 2:
+                MusicManager.Instance.FadeOut(MusicTrackIdentifier.DeepFry2);
+                MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry3);
+                break;
+            case 3:
+                MusicManager.Instance.FadeOut(MusicTrackIdentifier.DeepFry3);
+                MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry4);
+                break;
+        }
+
+        level.SetDeepFryLevel(deepFryLevel);
     }
 
     private void OnPlayerDeath()

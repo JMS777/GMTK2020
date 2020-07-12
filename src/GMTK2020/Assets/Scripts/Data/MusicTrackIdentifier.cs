@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 public enum MusicTrackIdentifier
 {
-    MainTrack, AdditionalTrack1
+    MainTrack, DeepFry1, DeepFry2, DeepFry3, DeepFry4
 }

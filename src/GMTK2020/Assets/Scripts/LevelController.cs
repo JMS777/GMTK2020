@@ -9,6 +9,12 @@ public class LevelController : MonoBehaviour
 
     private bool running = false;
 
+    private IEnumerable<LevelPanel> panels;
+
+    private void Awake() {
+        panels = GetComponentsInChildren<LevelPanel>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +43,13 @@ public class LevelController : MonoBehaviour
     public void Pause()
     {
         running = false;
+    }
+
+    public void SetDeepFryLevel(int deepFryLevel)
+    {
+        foreach(var panel in panels)
+        {
+            panel.SetDeepFryLevel(deepFryLevel);
+        }
     }
 }

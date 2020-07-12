@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public event Action PlayerWin;
     public event Action<int> PlayerDeepFied;
 
-    public int lives = 3;
+    public int lives = 4;
     public int DeepFryLevel { get; private set; } = 0;
 
     private PlayerRandomMovement randomMovement;
@@ -67,6 +67,11 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDied?.Invoke();
         }
+    }
+
+    public void OnHitEnd()
+    {
+        PlayerDied?.Invoke();
     }
 
     public void OnHitChip()
