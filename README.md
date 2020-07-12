@@ -28,5 +28,9 @@ Audacity
 
 ---
 
+## Post Processing Effect
+- Lens Distortion
+    - Centre: .5, .32, Intensity 1 or -1
+
 ## Licenses
 Music: https://www.bensound.com/royalty-free-music 
