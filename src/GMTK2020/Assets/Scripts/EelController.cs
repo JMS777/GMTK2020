@@ -16,8 +16,17 @@ public class EelController : MonoBehaviour
 
     public float speed = 1.5f;
 
+    private Animator animator;
+
+    private void Awake() {
+        animator = GetComponentInChildren<Animator>();
+        var randomFloat = Random.Range(0f, 1f);
+        animator.SetFloat("Offset", randomFloat);
+    }
+
     private void Start()
     {
+
         startPosition = transform.localPosition;
         // currentIntensity = intensityLevels[0];
     }
