@@ -16,8 +16,14 @@ public class PlayerController : MonoBehaviour
     private PlayerInputController playerInput;
     private PlayerMotor motor;
     private PlayerCollisionController playerCollision;
+    private AudioSource audioSource;
+
+    public AudioClip[] swishes;
     
     private Animator animator;
+
+    public float delay = .2f;
+    private float currentTime = 0f;
 
     private void Awake()
     {
@@ -26,6 +32,7 @@ public class PlayerController : MonoBehaviour
         motor = GetComponentInChildren<PlayerMotor>();
         playerCollision = GetComponentInChildren<PlayerCollisionController>();
         playerInput = GetComponent<PlayerInputController>();
+        audioSource = GetComponent<AudioSource>();
         playerInput.enabled = false;
     }
 
@@ -38,7 +45,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentTime += Time.deltaTime;
 
+        if (currentTime > delay && playerInput.enabled)
+        {
+            OnSwish();
+        }
     }
 
     public void StartPlayer()
@@ -78,5 +90,14 @@ public class PlayerController : MonoBehaviour
     {
         randomMovement.SetIntensity(0);
         PlayerWin?.Invoke();
+    }
+
+    public void OnSwish()
+    {
+        var clip = swishes[UnityEngine.Random.Range(0, swishes.Length)];
+
+        audioSource.Stop();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }
