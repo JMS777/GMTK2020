@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     private LevelController level;
     private PlayerController player;
+    private AudioSource audioSource;
 
     private HudController hud;
 
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
         level = FindObjectOfType<LevelController>();
         player = FindObjectOfType<PlayerController>();
         hud = FindObjectOfType<HudController>();
+
+        audioSource = GetComponent<AudioSource>();
 
         player.PlayerDied += OnPlayerDeath;
         player.PlayerWin += OnPlayerWin;
@@ -52,16 +55,30 @@ public class GameManager : MonoBehaviour
                 MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry1);
                 break;
             case 1:
+                audioSource.time = 0;
+                audioSource.Play();
+
                 MusicManager.Instance.FadeOut(MusicTrackIdentifier.DeepFry1);
                 MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry2);
                 break;
             case 2:
+                audioSource.time = 0;
+                audioSource.Play();
+
                 MusicManager.Instance.FadeOut(MusicTrackIdentifier.DeepFry2);
                 MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry3);
                 break;
             case 3:
+                audioSource.time = 0;
+                audioSource.Play();
+
                 MusicManager.Instance.FadeOut(MusicTrackIdentifier.DeepFry3);
                 MusicManager.Instance.FadeIn(MusicTrackIdentifier.DeepFry4);
+                break;
+            case 4:
+                audioSource.time = 0;
+                audioSource.Play();
+
                 break;
         }
 
