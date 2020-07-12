@@ -23,16 +23,30 @@ public class PlayerMotor : MonoBehaviour
     {
         var targetVelocity = currentInput * speed;
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref tmpVelocity, movementSmoothing);
-        var targetDirection = new Vector3(rb.velocity.x, 1f, 0f).normalized;
-        var angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-        // Debug.Log($"angle={angle}, targetDirection={targetDirection}");
-        // var q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Euler(targetDirection);
-        // transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotationSmooting * Time.deltaTime); 
+
     }
 
     public void SetInput(Vector2 input)
     {
         currentInput = input;
+
+        float rotationMax = 45;
+        var targetDirection = new Vector3(0f, 0f, 0f);
+
+        if(input.x == 0){
+            targetDirection.z = 0f;
+        } else {
+            if(input.x<0){
+                targetDirection.z = -rotationMax;
+            } else {
+                targetDirection.z = rotationMax;
+            }
+        }
+
+        Quaternion targetRotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetDirection),movementSmoothing);
+
+
+
+        transform.rotation = targetRotation;
     }
 }
